@@ -7,7 +7,6 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jwt.exceptions import InvalidTokenError
 from passlib.context import CryptContext
 from pydantic import BaseModel
-import uvicorn
 
 # to get a string like this run:
 # openssl rand -hex 32
@@ -146,7 +145,3 @@ async def read_own_items(
     current_user: Annotated[User, Depends(get_current_active_user)],
 ):
     return [{"item_id": "Foo", "owner": current_user.username}]
-
-
-if __name__ == "__main__":
-    uvicorn.run("main:app", port=5000, log_level="info")
